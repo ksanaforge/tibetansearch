@@ -1,0 +1,7 @@
+{
+	"files":["tibetansearch/jiangkangyur.kdb"
+	],
+	"repos":["node_modules/ksana-document"
+	],
+	"name":"tibetansearch"
+}
