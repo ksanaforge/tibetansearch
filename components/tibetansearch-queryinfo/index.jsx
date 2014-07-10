@@ -15,9 +15,9 @@ var expandedToken=React.createClass({
   },
   render:function() {
     var that=this;
-    return <div className="expanded col-md-4">
+    return <div className=" col-md-4">
       <span>{this.props.token.raw}</span> <span className="label label-info">{this.props.token.variants.length}</span>
-       <ul className="tokenlist list-group" style={{"height":"80%"}} >
+       <ul className="expanded tokenlist list-group" style={{"height":"80%"}} >
       {this.props.token.variants.map(function(t,idx){
         var classes="list-group-item";
         if (idx==0) classes+=" active";
@@ -49,7 +49,7 @@ var queryinfo = React.createClass({
     for (var i in this.props.Q.terms) {
       var T=this.props.Q.terms[i];
       if (T.variants.length) {
-        var selected=this.state.selected[group];
+        var selected=this.state.selected[group]||0;
         newq+=T.variants[selected]+"་";
         group++;
       } else {

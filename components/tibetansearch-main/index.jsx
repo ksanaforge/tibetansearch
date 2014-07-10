@@ -9,7 +9,7 @@ var Kde=Require("ksana-document").kde;
 var Kse=Require("ksana-document").kse;
 var main = React.createClass({ 
   getInitialState: function() {
-    return {engine:null,Q:null,Q2:null}; 
+    return {engine:null,Q:null,Q2:null,page:null}; 
   },  
   componentWillMount:function() {
     var that=this;
@@ -35,6 +35,11 @@ var main = React.createClass({
           if (that.hasWildcard(Q))  that.setState({Q:Q});
           else  that.setState({Q2:Q});
        });
+    } else if (type=="gopage") { 
+      var pageid=args[0], fileid=args[1],pagename=args[2];
+      Kse.highlightPage(this.state.engine,fileid,pageid,{fulltext:true,q:this.state.Q2.query},function(data){
+        that.setState({page:data,pagename:pagename});
+      });
     }
     return res;
   },
@@ -50,7 +55,8 @@ var main = React.createClass({
             <resultlist action={this.action} Q={this.state.Q2}  />
           </div>
         </div>  
-        <pagetext  action={this.action}  Q={this.state.Q2} className="pagetextarea" />
+        <pagetext  action={this.action}  page={this.state.page} pagename={this.state.pagename} 
+          className="pagetextarea" />
       </div>
     );
   }

@@ -6,10 +6,11 @@ var resultlist = React.createClass({
     return {bar: "world"};
   },
   gopage:function(e) {
+    var pageid=parseInt(e.target.attributes["data-page"].value);
+    var fileid=parseInt(e.target.attributes["data-file"].value);
     var pagename=e.target.innerHTML;
-    var file=e.target.attributes["data-file"];
-    this.props.action("gopage",pagename);
-  },
+    this.props.action("gopage",pageid,fileid,pagename);
+  }, 
   warning:function() {
     if (this.props.Q.rawresult.length>1000) {
       return ",only first 1000 hits are shown";
@@ -22,7 +23,7 @@ var resultlist = React.createClass({
     }
     return this.props.Q.excerpt.map(function(r,i){ // excerpt is an array 
       return <div>
-      {r.seq+1} [<a href="#" data-file={r.file} onClick={that.gopage}>{r.pagename}</a>]
+      {r.seq+1} [<a href="#" data-file={r.file} data-page={r.page}  onClick={that.gopage}>{r.pagename}</a>]
       <div className="result" dangerouslySetInnerHTML={{__html:r.text}}></div>
       </div>
     });  
@@ -36,10 +37,14 @@ var resultlist = React.createClass({
     </div>
     );
   },
+  showhit:function() {
+    if (!this.props.Q.rawresult|| !this.props.Q.rawresult.length) return "0";
+    else return this.props.Q.rawresult.length;
+  },
   render: function() {
       if (this.props.Q) return <div className="resultlist">
         querystring:<span className="query">{this.props.Q.query}</span>
-          <span className="label label-info">{this.props.Q.rawresult.length}</span>{this.warning()}
+          <span className="label label-info">{this.showhit()}</span>{this.warning()}
         {this.show()}
       </div>
       else return this.showLogo();
