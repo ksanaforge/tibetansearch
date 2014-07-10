@@ -24,7 +24,7 @@ var searchbox = React.createClass({
          <div className="input-group"> 
               <span className="input-group-btn">
               <button onClick={this.insertwildcard} className="btn btn-default" type="button">%</button>
-              <input defaultValue="འ%ས་སོ" ref="tofind" onKeyPress={this.keypress} type="text" className="input-lg large-input"></input>
+              <input defaultValue="འ%ས་%སོ" ref="tofind" onKeyPress={this.keypress} type="text" className="input-lg large-input"></input>
                 <button onClick={this.dosearch} className="btn btn-default" type="button">Go!</button>
               </span>
           </div>

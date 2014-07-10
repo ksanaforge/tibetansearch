@@ -1,4 +1,4 @@
 .resultlist {overflow-y:auto;height:90%;}
-.result {font-size:180%;}
+.result {font-size:200%;}
 hl {color:red;}
-.query {font-size:200%;}
+.expanded , .query {font-size:200%;}

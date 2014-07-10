@@ -30,10 +30,10 @@ var main = React.createClass({
     var res=null, that=this;
     if (type==="search") { 
        var q=args[0];
-       var opts={range:{filestart:0,maxfile:100}};
+       var opts={range:{filestart:0,maxfile:100,maxhit:1000}};
        Kse.search(this.state.engine,q,opts,function(Q){
           if (that.hasWildcard(Q))  that.setState({Q:Q});
-          else                                that.setState({Q2:Q});
+          else  that.setState({Q2:Q});
        });
     }
     return res;
