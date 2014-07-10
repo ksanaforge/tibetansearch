@@ -3,27 +3,29 @@
 //var othercomponent=Require("other"); 
 var expandedToken=React.createClass({
   tokenclick:function(e) {
-    
-    var elements=e.target.parentNode.getElementsByClassName("active");
+    var n=e.target;
+    if (n.tagName!="A") n=n.parentElement;
+    var elements=n.parentNode.getElementsByClassName("active");
     for (var i=0;i<elements.length;i++){
       elements[i].classList.remove("active");
     }
-    e.target.classList.toggle('active');
-    var ntoken=parseInt(e.target.attributes["data-ntoken"].value);
-    var group=parseInt(e.target.attributes["data-group"].value);
+    n.classList.toggle('active');
+    var ntoken=parseInt(n.attributes["data-ntoken"].value);
+    var group=parseInt(n.attributes["data-group"].value);
     this.props.action("tokenclick",ntoken, group);
   },
   render:function() {
     var that=this;
+    var token=this.props.token;
     return <div className=" col-md-4">
       <span>{this.props.token.raw}</span> <span className="label label-info">{this.props.token.variants.length}</span>
        <ul className="expanded tokenlist list-group" style={{"height":"80%"}} >
-      {this.props.token.variants.map(function(t,idx){
+      {token.variants.map(function(t,idx){
         var classes="list-group-item";
         if (idx==0) classes+=" active";
         return <a href="#"  data-group={that.props.group} 
-            data-ntoken={idx}
-            onClick={that.tokenclick}  className={classes}>{t}
+            data-ntoken={idx}   title={t[1]}
+            onClick={that.tokenclick}  className={classes}>{t[0]}
             </a>
       })}
     </ul></div>
@@ -38,11 +40,11 @@ var queryinfo = React.createClass({
   help:function() {
     return <span>Syntax:
       <br/>use space or shad to seperate multiple terms, press enter to search.
-      <br/>x% :  tokens starts with w
-      <br/>%y :  tokens ends with y
-      <br/>%x% :  tokens containing with x
-      <br/>x%y :  tokens starts with x and ends with y
-      <br/>maximum 3 token in search phrase can have wildcard
+      <br/>x% :  match syllable starts with x
+      <br/>%y :  match syllable ends with y
+      <br/>%x% :  match syllable containing with x
+      <br/>x%y :  match syllable starts with x and ends with y
+      <br/>maximum 3 syllables can have wildcard.
     </span>
   },
   newsearchphrase:function() {
@@ -51,7 +53,7 @@ var queryinfo = React.createClass({
       var T=this.props.Q.terms[i];
       if (T.variants.length) {
         var selected=this.state.selected[group]||0;
-        newq+=T.variants[selected]+"་";
+        newq+=T.variants[selected][0]+"་";
         group++;
       } else {
         newq+=T.raw+"་";
