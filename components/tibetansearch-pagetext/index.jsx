@@ -17,7 +17,7 @@ var pagetext = React.createClass({
       return this.help();
     } else 
     return (
-      <div>
+      <div className="pagecontainter">
         <div className="pagetext" dangerouslySetInnerHTML={{__html:this.props.page.text}}></div>        
       <h5><span className="label label-success">{this.props.pagename}</span></h5>
       </div>

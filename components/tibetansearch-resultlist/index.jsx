@@ -27,13 +27,13 @@ var resultlist = React.createClass({
       <div className="result" dangerouslySetInnerHTML={{__html:r.text}}></div>
       </div>
     });  
-  },  
+  },   
   showLogo:function() {
     return (
-    <div className="jumbotron">
+    <div className="jumbotron span12 pagination-centered">
      <h1>Tibetan Search Engine</h1>
-        <p>...</p>
-        <p><a className="btn btn-primary btn-lg" role="button">About</a></p>
+        <p>version: 2014/7/10</p>
+        <img align="center" src="treasure.png"></img>
     </div>
     );
   },

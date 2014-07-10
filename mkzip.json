@@ -1,5 +1,5 @@
 {
-	"files":["tibetansearch/jiangkangyur.kdb"
+	"files":["tibetansearch/jiangkangyur.kdb","tibetansearch/treasure.png"
 	],
 	"repos":["node_modules/ksana-document"
 	],

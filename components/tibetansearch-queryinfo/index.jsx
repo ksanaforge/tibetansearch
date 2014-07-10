@@ -37,6 +37,7 @@ var queryinfo = React.createClass({
   },
   help:function() {
     return <span>Syntax:
+      <br/>use space or shad to seperate multiple terms, press enter to search.
       <br/>x% :  tokens starts with w
       <br/>%y :  tokens ends with y
       <br/>%x% :  tokens containing with x
