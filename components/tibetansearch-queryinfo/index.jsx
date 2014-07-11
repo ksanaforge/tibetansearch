@@ -14,13 +14,28 @@ var expandedToken=React.createClass({
     var group=parseInt(n.attributes["data-group"].value);
     this.props.action("tokenclick",ntoken, group);
   },
+  showtokenwithhits:function(tokenwithhits,variants) {
+    if (tokenwithhits!=variants.length) {
+      return <span><span className="label label-warning">{tokenwithhits}</span>/
+      <span className="label label-info">{this.props.token.variants.length}</span></span>
+    }else {
+      return <span className="label label-info">{this.props.token.variants.length}</span>      
+    }
+      
+  },
+  
   render:function() {
     var that=this;
     var token=this.props.token;
+    var tokenwithhits=0;
+    this.props.token.variants.map(function(v){
+      if (v[1]) tokenwithhits++
+    });
     return <div className=" col-md-4">
-      <span>{this.props.token.raw}</span> <span className="label label-info">{this.props.token.variants.length}</span>
+      <span>{this.props.token.raw}</span>{this.showtokenwithhits(tokenwithhits,this.props.token.variants)}
        <ul className="expanded tokenlist list-group" style={{"height":"80%"}} >
       {token.variants.map(function(t,idx){
+        if (t[1]==0) return ; // variants without hit
         var classes="list-group-item";
         if (idx==0) classes+=" active";
         return <a href="#"  data-group={that.props.group} 
@@ -38,13 +53,18 @@ var queryinfo = React.createClass({
     return {bar: "world",selected:[]};
   },
   help:function() {
-    return <span>Syntax:
-      <br/>use space or shad to seperate multiple terms, press enter to search.
+    return <span><strong>Usage:</strong>
+      <br/>press enter for quick search.
+      <br/>if the search phrase has only one wildcard syllable, hit [Filter] to eliminate impossible candidate.
+      <br/>use space or shad to seperate multiple terms.
+      <br/><strong>Wildcard Syllable:</strong>
       <br/>x% :  match syllable starts with x
       <br/>%y :  match syllable ends with y
-      <br/>%x% :  match syllable containing with x
+      <br/>%x% :  match syllable containing x
       <br/>x%y :  match syllable starts with x and ends with y
       <br/>maximum 3 syllables can have wildcard.
+      <br/>
+      <br/><i>Special thanks to Khenpo Karma Namgyal from leksheyling</i>
     </span>
   },
   newsearchphrase:function() {
@@ -86,7 +106,7 @@ var queryinfo = React.createClass({
     return res;
   },
   render: function() {
-    if (!this.props.Q || !this.props.Q.excerpt || !this.props.Q.terms.length) return this.help();
+    if (!this.props.Q || !this.props.Q.terms.length) return this.help();
     else return (
       <div className="row">
         {this.showExpandedTokens()}
