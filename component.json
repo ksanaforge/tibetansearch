@@ -6,11 +6,9 @@
   "keywords": [],
   "dependencies": {
     "ksanaforge/boot": "*",
-    "socketio/socketio": "*",
     "brighthas/bootstrap": "*",
     "ksana/document": "*",
     "ksanaforge/kse": "*",
-    "component/jquery": "*",
     "tibetansearch/main": "*",
     "tibetansearch/queryinfo": "*",
     "tibetansearch/resultlist": "*",
@@ -24,7 +22,6 @@
     "../node_modules/"
   ],
   "local": [
-    "facebook/react"
   ],
   "license": "MIT",
   "main": "index.js",

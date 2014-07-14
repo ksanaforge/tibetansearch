@@ -52,7 +52,7 @@ var main = React.createClass({
   findone:function(Q) {
     var that=this;
     var q=this.nextsearchphrase(Q);
-    Kse.search(this.state.engine,q,{},function(QQ){
+    Kse.search(this.state.engine,q,{nogroup:true},function(QQ){
       var w=Q.wildcardterm;
       var wt=Q.terms[w];
       var vidx=Q.vidx;

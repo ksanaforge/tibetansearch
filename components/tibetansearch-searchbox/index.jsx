@@ -45,7 +45,7 @@ var searchbox = React.createClass({
     if (this.props.progress==1) {
       return <button onClick={this.filter} className={"btn btn-warning"+disabled} type="button">Filter</button>  
     } else {
-      return <span>{(this.props.progress*100).toFixed(2)+"%"}</span>
+      return <span>{Math.floor(this.props.progress*100)+"%"}</span>
     }
   },
   render: function() {
