@@ -138,6 +138,9 @@ var main = React.createClass({
 
       <div>
       {this.state.dialog?this.openFileinstaller():null}
+        <pagetext  action={this.action}  page={this.state.page} pagename={this.state.pagename} 
+          className="pagetextarea" />
+
         <div className="row searcharea">
           <div className="col-md-4">
             <searchbox action={this.action} progress={this.state.progress} wildcard={this.state.wildcard} />
@@ -147,8 +150,6 @@ var main = React.createClass({
             <resultlist action={this.action} Q={this.state.Q2}  />
           </div>
         </div>  
-        <pagetext  action={this.action}  page={this.state.page} pagename={this.state.pagename} 
-          className="pagetextarea" />
       </div>
     );
    }

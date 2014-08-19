@@ -22,6 +22,7 @@ var resultlist = React.createClass({
       return <div></div>
     }
     return this.props.Q.excerpt.map(function(r,i){ // excerpt is an array 
+      if (!r) return null;
       return <div>
       {r.seq+1} [<a href="#" data-file={r.file} data-page={r.page}  onClick={that.gopage}>{r.pagename}</a>]
       <div className="result" dangerouslySetInnerHTML={{__html:r.text}}></div>
