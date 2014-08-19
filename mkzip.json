@@ -2,9 +2,6 @@
 	"files":["tibetansearch/jiangkangyur.kdb",
 		"tibetansearch/treasure.png","tibetansearch/README.md"
 	],
-	"repos":["node_modules/ksana-document",
-"node_modules/yadb",
-"node_modules/yase"
-	],
+	"repos":["node_modules/ksana-document"	],
 	"name":"tibetansearch"
 }

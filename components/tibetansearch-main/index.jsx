@@ -1,21 +1,22 @@
 /** @jsx React.DOM */
-
 var searchbox=Require("searchbox"); 
 var queryinfo=Require("queryinfo"); 
 var resultlist=Require("resultlist");  
 var pagetext=Require("pagetext"); 
-
+var bootstrap=Require("bootstrap");
 var Kde=Require("ksana-document").kde;
 var Kse=Require("ksana-document").kse;
+
+var fileinstaller=Require("fileinstaller");  // install files to browser sandboxed file system
+ var require_kdb=[{  //list of ydb for running this application
+  filename:"jiangkangyur.kdb"  , url:"http://ya.ksana.tw/kdb/jiangkangyur.kdb" , desc:"Jiang Kangyur (v1~v40)"
+}];    
+ 
 var main = React.createClass({ 
   getInitialState: function() {
-    return {engine:null,Q:null,Q2:null,page:null,progress:1,wildcard:0}; 
+    return {engine:null,Q:null,Q2:null,page:null,progress:1,wildcard:0,quota:0}; 
   },  
   componentWillMount:function() {
-    var that=this;
-    Kde.open("jiangkangyur",function(e){
-      that.setState({engine:e});
-    })
   },
   wildcardCount:function(Q) {
     var wildcard=0;
@@ -30,18 +31,18 @@ var main = React.createClass({
   },
   nextsearchphrase:function(Q) {
     var newq="";
-    Q.vidx=Q.vidx||0;
+    Q.vidx=Q.vidx||0; 
     for (var i in Q.terms) {
       var T=Q.terms[i];
       if (T.variants.length) {
         newq+=T.variants[Q.vidx][0]+"་";
       } else {
         newq+=T.raw+"་";
-      }
-    }
+      } 
+    } 
     Q.vidx++;
     return newq;
-  },
+  },  
   updateProgress:function(that) {
     var vidx=that.state.Q.vidx;
     var wt=that.state.Q.terms[that.state.Q.wildcardterm];
@@ -115,9 +116,28 @@ var main = React.createClass({
     }
     return res;
   },
+  onReady:function(usage,quota) {
+    if (!this.state.engine) Kde.open("jiangkangyur",function(engine){
+        this.setState({engine:engine});
+    },this);      
+    this.setState({dialog:false,quota:quota,usage:usage});
+  },
+  openFileinstaller:function(autoclose) {
+    if (window.location.origin.indexOf("http://127.0.0.1")==0) {
+      require_kdb[0].url=window.location.origin+"/jiangkangyur.kdb";
+    }
+    return <fileinstaller quota="512M" autoclose={autoclose} needed={require_kdb} 
+                     onReady={this.onReady}/>
+  },
+
   render: function() { 
+    if (!this.state.quota) { // install required db
+        return this.openFileinstaller(true);
+    } else { 
     return ( 
+
       <div>
+      {this.state.dialog?this.openFileinstaller():null}
         <div className="row searcharea">
           <div className="col-md-4">
             <searchbox action={this.action} progress={this.state.progress} wildcard={this.state.wildcard} />
@@ -131,6 +151,7 @@ var main = React.createClass({
           className="pagetextarea" />
       </div>
     );
+   }
   }
 });
 module.exports=main;

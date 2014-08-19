@@ -8,12 +8,14 @@
     "ksanaforge/boot": "*",
     "brighthas/bootstrap": "*",
     "ksana/document": "*",
-    "ksanaforge/kse": "*",
     "tibetansearch/main": "*",
     "tibetansearch/queryinfo": "*",
     "tibetansearch/resultlist": "*",
     "tibetansearch/pagetext": "*",
-    "tibetansearch/searchbox": "*"
+    "tibetansearch/searchbox": "*",
+    "ksanaforge/fileinstaller":"*",
+    "ksanaforge/htmlfs":"*",
+    "ksanaforge/checkbrowser":"*"
   },
   "development": {},
   "paths": [

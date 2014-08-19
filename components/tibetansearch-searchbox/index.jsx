@@ -14,7 +14,7 @@ var searchbox = React.createClass({
       },300);
   },
   keypress:function(e) {
-    if (e.keyCode==13) this.dosearch();
+    if (e.key=="Enter") this.dosearch();
   },
   dosearch:function() {
     var tofind=this.refs.tofind.getDOMNode().value;
