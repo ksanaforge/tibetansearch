@@ -1,24 +1,32 @@
 /** @jsx React.DOM */
 
 //var othercomponent=Require("other"); 
+var tibetan=Require("ksana-document").languages.tibetan; 
+
 var searchbox = React.createClass({
   getInitialState: function() {
     return {bar: "world"};
+  },
+  getTofind:function() {
+      var tofind=this.refs.tofind.getDOMNode().value;
+      tofind=tofind.replace(/%/g,"\uffff");
+      tofind=tibetan.romanize.fromWylie(tofind,null,false); 
+      tofind=tofind.replace(/\uffff/g,"%");
+      return tofind;
   },
   tofindchange:function() {
       var that=this;
       clearTimeout(this.timer1);
       this.timer1=setTimeout(function(){
-        var tofind=that.refs.tofind.getDOMNode().value;
-        that.props.action("tofindchange",tofind);
+
+        that.props.action("tofindchange",that.getTofind());
       },300);
   },
   keypress:function(e) {
     if (e.key=="Enter") this.dosearch();
   },
   dosearch:function() {
-    var tofind=this.refs.tofind.getDOMNode().value;
-    this.props.action("search",tofind);
+    this.props.action("search",this.getTofind());
   },
   insertwildcard:function() { 
     var dom=this.refs.tofind.getDOMNode();
@@ -36,8 +44,7 @@ var searchbox = React.createClass({
     },300);
   },
   filter:function() {
-    var tofind=this.refs.tofind.getDOMNode().value;
-    this.props.action("filter",tofind);
+    this.props.action("filter",this.getTofind());
   },
   showfilter:function() {
     var disabled="";

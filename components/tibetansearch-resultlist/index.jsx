@@ -33,7 +33,7 @@ var resultlist = React.createClass({
     return (
     <div className="jumbotron span12 pagination-centered">
      <h1>Tibetan Search Engine</h1>
-        <p>version: 2014/7/10</p>
+        <p>version: 2014/12/9 build 3</p>
         <img align="center" src="treasure.png"></img>
     </div>
     );
