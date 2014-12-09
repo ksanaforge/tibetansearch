@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 //var othercomponent=Require("other"); 
-var expandedToken=React.createClass({
+var ExpandedToken=React.createClass({
   tokenclick:function(e) {
     var n=e.target;
     if (n.tagName!="A") n=n.parentElement;
@@ -98,7 +98,7 @@ var queryinfo = React.createClass({
       var T=this.props.Q.terms[i];
 
       if (T.variants.length) {
-        res.push(<expandedToken action={this.action} token={T} group={i} />);
+        res.push(<ExpandedToken action={this.action} token={T} group={i} />);
         expanded++;
         if (expanded>=3) break;
       }

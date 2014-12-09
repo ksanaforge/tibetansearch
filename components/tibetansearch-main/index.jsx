@@ -1,13 +1,13 @@
 /** @jsx React.DOM */
-var searchbox=Require("searchbox"); 
-var queryinfo=Require("queryinfo"); 
-var resultlist=Require("resultlist");  
-var pagetext=Require("pagetext"); 
+var Searchbox=Require("searchbox"); 
+var Queryinfo=Require("queryinfo"); 
+var Resultlist=Require("resultlist");  
+var Pagetext=Require("pagetext"); 
 var bootstrap=Require("bootstrap");
 var Kde=Require("ksana-document").kde;
 var Kse=Require("ksana-document").kse;
 
-var fileinstaller=Require("fileinstaller");  // install files to browser sandboxed file system
+var Fileinstaller=Require("fileinstaller");  // install files to browser sandboxed file system
  var require_kdb=[{  //list of ydb for running this application
   filename:"jiangkangyur.kdb"  , url:"http://ya.ksana.tw/kdb/jiangkangyur.kdb" , desc:"Jiang Kangyur (v1~v40)"
 }];    
@@ -126,7 +126,7 @@ var main = React.createClass({
     if (window.location.origin.indexOf("http://127.0.0.1")==0) {
       require_kdb[0].url=window.location.origin+"/jiangkangyur.kdb";
     }
-    return <fileinstaller quota="512M" autoclose={autoclose} needed={require_kdb} 
+    return <Fileinstaller quota="512M" autoclose={autoclose} needed={require_kdb} 
                      onReady={this.onReady}/>
   },
 
@@ -138,16 +138,16 @@ var main = React.createClass({
 
       <div>
       {this.state.dialog?this.openFileinstaller():null}
-        <pagetext  action={this.action}  page={this.state.page} pagename={this.state.pagename} 
+        <Pagetext  action={this.action}  page={this.state.page} pagename={this.state.pagename} 
           className="pagetextarea" />
 
         <div className="row searcharea">
           <div className="col-md-4">
-            <searchbox action={this.action} progress={this.state.progress} wildcard={this.state.wildcard} />
-            <queryinfo action={this.action} Q={this.state.Q} />
+            <Searchbox action={this.action} progress={this.state.progress} wildcard={this.state.wildcard} />
+            <Queryinfo action={this.action} Q={this.state.Q} />
           </div>
           <div className="col-md-8">
-            <resultlist action={this.action} Q={this.state.Q2}  />
+            <Resultlist action={this.action} Q={this.state.Q2}  />
           </div>
         </div>  
       </div>

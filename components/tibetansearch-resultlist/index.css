@@ -1,7 +1,7 @@
 .resultlist {overflow-y:auto;height:90%;}
 .result {font-size:180%;}
-hl {background-color:khaki}
-hl[n="1"] {background-color:orchid}
-hl[n="2"] {background-color:lightblue}
-hl[n="2"] {background-color:lightgreen}
+.hl {background-color:khaki}
+.hl1 {background-color:orchid}
+.hl2 {background-color:lightblue}
+.hl3 {background-color:lightgreen}
 .expanded , .query {font-size:200%;}
